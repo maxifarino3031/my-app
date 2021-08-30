@@ -29,8 +29,8 @@ export const ListView = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {members && members.map((member: Member) => {
-                        return <tr key={member.ssn}>
+                    {members && members.map((member: Member,index:number) => {
+                        return <tr key={index}>
                             <td>{member.firstName}</td>
                             <td>{member.lastName}</td>
                             <td>{member.address}</td>

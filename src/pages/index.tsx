@@ -8,7 +8,7 @@ import { ListView } from './components/list_view'
 
 export const HomePage = () => {
 
-    const { data, isLoading } = useQuery('authUser', getTokenAuth);
+    const { data} = useQuery('authUser', getTokenAuth);
 
     useEffect(() => {
         if (data) {

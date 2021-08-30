@@ -8,7 +8,7 @@ import { Member } from '../../../common/models/member';
 
 export const ListView = () => {
 
-    const { data, isLoading } = useQuery('getMembers', getMembers);
+    const { data} = useQuery('getMembers', getMembers);
     const [members, setMembers] = useRecoilState(listMembersState);
 
     useEffect(() => {

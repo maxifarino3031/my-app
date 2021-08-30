@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { handleError } from '../exception';
 import { getAccessToken } from '../storage';
 
 const instance = axios.create({
@@ -24,7 +25,10 @@ instance.interceptors.response.use(
     function (response) {
         return response;
     },
-    async function (error) {
+    async function (error) {        
+        if (error.response.status === 401) {
+            return await handleError(instance, error);
+        }
         return Promise.reject(error);
     }
 );

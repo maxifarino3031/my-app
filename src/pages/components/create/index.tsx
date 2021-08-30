@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 import { useMutation } from 'react-query';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { saveMember } from '../../../common/adapters/members';
 import { listMembersState } from '../../../common/atoms/members';
 import { ActionsButtons } from './actions-buttons';
@@ -34,8 +34,8 @@ export const Create = () => {
         return members.find((member: Member) => member.ssn === value) === undefined;
     }
 
-    const { register, handleSubmit, formState,reset } = useForm({
-        defaultValues:{firstName:'',lastName:'',address:'',ssn:''},
+    const { register, handleSubmit, formState, reset } = useForm({
+        defaultValues: { firstName: '', lastName: '', address: '', ssn: '' },
         resolver: yupResolver(schema)
     });
 
@@ -49,11 +49,11 @@ export const Create = () => {
         }
     });
 
-    const onSubmit = (member: Member) => {        
-        mutationMember.mutate({...member});
+    const onSubmit = (member: Member) => {
+        mutationMember.mutate({ ...member });
     }
 
-    const addNewMember = (member: Member) => {        
+    const addNewMember = (member: Member) => {
         setMember((oldMember) => [
             ...oldMember,
             member,
@@ -62,7 +62,7 @@ export const Create = () => {
 
 
     useEffect(() => {
-        console.log('create')
+        
     }, [])
 
     return (
@@ -89,7 +89,7 @@ export const Create = () => {
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    <Form.Label>SNN:</Form.Label>                    
+                    <Form.Label>SNN:</Form.Label>
                     <InputMask className='form-control' mask='999-99-9999' {...register('ssn')} placeholder='ssn' />
                     <span>{formState.errors.ssn?.message}</span>
                 </Form.Group>

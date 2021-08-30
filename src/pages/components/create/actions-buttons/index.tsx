@@ -6,7 +6,7 @@ export const ActionsButtons = () => {
     return (
         
         <div>            
-                <Button className='btnClear' variant="primary" type="reset">
+                <Button className='btnClear' variant="secondary" type="reset">
                     Clear
                 </Button>
             

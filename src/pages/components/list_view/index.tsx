@@ -1,18 +1,27 @@
 import { useEffect } from 'react'
 import { Table } from 'react-bootstrap'
+import { useQuery } from 'react-query';
+import { useRecoilState } from 'recoil';
+import { getMembers } from '../../../common/adapters/members';
+import { listMembersState } from '../../../common/atoms/members';
+import { Member } from '../../../common/models/member';
 
 export const ListView = () => {
 
-    useEffect(()=>{
-        console.log('listView')
-    },[])
+    const { data, isLoading } = useQuery('getMembers', getMembers);
+    const [members, setMembers] = useRecoilState(listMembersState);
+
+    useEffect(() => {
+        if (data) {
+            setMembers([...data]);
+        }
+    }, [data])
 
     return (
         <>
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Address</th>
@@ -20,14 +29,15 @@ export const ListView = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>DSADASDDASDSAD</td>
-                        <td>DSSADASDASDA</td>
-                        <td>@DASDASDSDASADASDASD</td>
-                        <td>@DSDSADASDADASDASDADASD</td>
-                    </tr>
-                                      
+                    {members && members.map((member: Member) => {
+                        return <tr key={member.ssn}>
+                            <td>{member.firstName}</td>
+                            <td>{member.lastName}</td>
+                            <td>{member.address}</td>
+                            <td>{member.ssn}</td>
+                        </tr>
+                    })}
+
                 </tbody>
             </Table>
         </>

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useIdleTimer } from 'react-idle-timer';
 
 export const IsldleHooks = () => {
-    const timeout = 3000;
+    const timeout = 12000;
     const [remaining, setRemaining] = useState(timeout);
     const [elapsed, setElapsed] = useState(0);
     const [lastActive, setLastActive] = useState(+new Date())

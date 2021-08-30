@@ -1,6 +1,6 @@
 import api from './api';
 
 export const getTokenAuth = async () => {
-    const response = await api.post('http://localhost:8081/auth', { username: 'sarah', password: 'connor' });
+    const response = await api.post('auth', { username: 'sarah', password: 'connor' });
     return response.data;
 }

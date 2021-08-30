@@ -3,7 +3,7 @@ import { handleError } from '../exception';
 import { getAccessToken } from '../storage';
 
 const instance = axios.create({
-    baseURL: process.env.REACT_APP_API_BASE,
+    baseURL: 'http://localhost:8081/', /**Se deveria crear un file .env por entorno que se tenga */
 });
 
 axios.defaults.withCredentials = true;

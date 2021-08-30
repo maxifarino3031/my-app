@@ -21,7 +21,7 @@ export const Create = () => {
         lastName: yup.string().required(REQUIRED_MESSAGE),
         address: yup.string().required(REQUIRED_MESSAGE),
         ssn: yup.string().required(REQUIRED_MESSAGE).test(
-            "hairProfessional",
+            "ssn",
             SNN_MESSAGE_DUPLICATE,
             value => validateDuplicateSnn(value)
         )

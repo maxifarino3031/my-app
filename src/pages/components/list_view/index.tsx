@@ -1,21 +1,30 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap'
 import { useQuery } from 'react-query';
 import { useRecoilState } from 'recoil';
 import { getMembers } from '../../../common/adapters/members';
 import { listMembersState } from '../../../common/atoms/members';
+import { IsldleHooks } from '../../../common/hooks/isIdle-hooks';
 import { Member } from '../../../common/models/member';
 
 export const ListView = () => {
 
-    const { data} = useQuery('getMembers', getMembers);
+    const { isIdle } = IsldleHooks();
+    const { data, refetch } = useQuery('getMembers', getMembers);
     const [members, setMembers] = useRecoilState(listMembersState);
 
+
     useEffect(() => {
+        if (isIdle) {
+            refetch();
+        }
+
         if (data) {
             setMembers([...data]);
         }
-    }, [data])
+    }, [data, isIdle])
+
+
 
     return (
         <>
@@ -29,7 +38,7 @@ export const ListView = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {members && members.map((member: Member,index:number) => {
+                    {members && members.map((member: Member, index: number) => {
                         return <tr key={index}>
                             <td>{member.firstName}</td>
                             <td>{member.lastName}</td>
@@ -40,6 +49,7 @@ export const ListView = () => {
 
                 </tbody>
             </Table>
+
         </>
     )
 }
